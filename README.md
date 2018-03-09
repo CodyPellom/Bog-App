@@ -8,3 +8,7 @@ Time trials intorduces the idea of building out an express/react full-stack appl
 
 
 My thoughts initially: Im a little worried about the express aspect but since project two I have beome slightly more comfortable with express and the idea in general of fullstack web development. I think with some practice, I will become a lot more comfortable with back end devlopent. 
+
+a 3-5 sentences reflection on how this went for you
+a tip for others to help conquer some part of the app that used to trip you up
+the times for your first and fourth runs
