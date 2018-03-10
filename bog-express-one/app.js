@@ -23,7 +23,7 @@ db.on('error', () => {
     console.log('error connecting to mongoDB')
 })
 
-
+app.use(express.static(`${__dirname}/client/build`))
 app.use(logger('dev'))
 app.use(bodyparser.json())
 
@@ -37,6 +37,65 @@ app.listen(port, () => {
     console.log('app is up and running on port' + PORT)
 })
 
+//routes for Bog App
+
+router.get('/', (req, res) => {
+    Creature.find().then((creatures) => {
+        res.json(creatures)
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        const creatureId = req.params.id
+        const creature = await Creatur.findbyId(creatureId)
+        res.json(creature)
+    }   catch(err) {
+        console.log(err)
+        res.json(err)
+    }
+})
+
+router.post('/', async (req, res) => {
+    try {
+        const newCreature = req.body
+        const savedCreature = await Creature.create(newCreature)
+        res.json(savedCreature)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    try {
+        const creatureId = req.params.id
+        const updatedCreature = req.body
+        const savedCreature = await Creature.findByIdAndUpdate(creatureId, updatedCreature)
+        res.json(savedCreature)
+    }   catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const creatureId = req.params.id
+        await Creature.findByIdAndRemove(creatureId)
+        res.json({
+            msg: 'Successfully Deleted'
+        })
+    } catch (err)
+    console.log(err)
+    res.status(500).json(err)
+})
+
+app.get('/*', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`)
+})
 
 
 
