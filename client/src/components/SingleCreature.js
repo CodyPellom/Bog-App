@@ -4,7 +4,7 @@ class SingleCreature extends Component {
     render() {
         return (
             <div>
-                
+                <h1>One Creature</h1>
             </div>
         );
     }
