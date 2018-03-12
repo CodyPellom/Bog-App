@@ -19,10 +19,12 @@ db.on('open', () => {
 
  app.use(logger('dev'))
  app.use(bodyParser.json())
+ app.use(express.static(`${__dirname}/client/build`))
 
-app.get('/', (req, res) => {
-    console.log('hello wurld')
+app.get('/*', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`)
 })
+
 
 const PORT = process.env.PORT || 3001
 
